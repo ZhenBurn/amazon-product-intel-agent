@@ -7,7 +7,7 @@
 | 时间 | 看什么 | 重点 |
 | --- | --- | --- |
 | 0:00–0:45 | 根目录 `README.md` | 问题、4 个 ASIN、真实页面、边界 |
-| 0:45–1:45 | [`完整周报`](../assets/product-intel-report.html) | 运行统计、本周信号、卖家、缺口、五点/图片 |
+| 0:45–1:45 | [`周报截图`](../assets/product-intel-report.png) / [`HTML`](../assets/product-intel-report.html) | 运行统计、本周信号、卖家、缺口、五点/图片 |
 | 1:45–2:30 | [`Excel 回写`](../assets/product-intel-excel.png) / [`历史`](../assets/product-intel-excel-history.png) | 15 行历史 + 新行；同日重跑只更新 |
 | 2:30–3:30 | [`eval/real_report.md`](../../eval/real_report.md) | 4 个真实页面、11 字段、44/44、HTML hash |
 | 3:30–4:15 | [`eval/llm_report.md`](../../eval/llm_report.md) | JSON 契约、数字 grounding、降级 |

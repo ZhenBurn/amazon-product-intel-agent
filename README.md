@@ -11,7 +11,7 @@
 | 时间 | 看什么 | 重点 |
 | --- | --- | --- |
 | 0:00–0:45 | 本 README | 问题、4 ASIN、真实页面、边界 |
-| 0:45–1:45 | [`完整周报`](docs/assets/product-intel-report.html) | 运行统计、本周信号、卖家、缺口 |
+| 0:45–1:45 | [`周报截图`](docs/assets/product-intel-report.png) / [`HTML`](docs/assets/product-intel-report.html) | 运行统计、本周信号、卖家、缺口 |
 | 1:45–2:30 | [`Excel 回写`](docs/assets/product-intel-excel.png) / [`历史`](docs/assets/product-intel-excel-history.png) | 15 行历史 + 新行；同日重跑更新 |
 | 2:30–3:30 | [`eval/real_report.md`](eval/real_report.md) | 4 个真实页面 × 11 字段，44/44 |
 | 3:30–4:15 | [`eval/llm_report.md`](eval/llm_report.md) | JSON 契约、数字 grounding、降级 |
