@@ -1,0 +1,453 @@
+{
+  "summary": {
+    "mode": "real",
+    "model": "deepseek-v4.1-flash-1017",
+    "prompt_version": "analysis_v2",
+    "cases": 8,
+    "grounding_pass": 8,
+    "grounding_rate": 1.0,
+    "fallback_count": 1,
+    "avg_latency_ms": 31790.11,
+    "p50_latency_ms": 31808.56,
+    "p95_latency_ms": 47863.64,
+    "tokens": {
+      "prompt_tokens": 13047,
+      "completion_tokens": 8554,
+      "total_tokens": 21601
+    }
+  },
+  "cases": [
+    {
+      "case": "B0874XWW23:full",
+      "asin": "B0874XWW23",
+      "product": "Samsung T7",
+      "history_size": 2,
+      "grounding_ok": true,
+      "grounding_violations": [],
+      "fallback": false,
+      "latency_ms": 47665.19,
+      "usage": {
+        "completion_tokens": 2070,
+        "prompt_tokens": 1691,
+        "total_tokens": 3761,
+        "completion_tokens_details": {
+          "accepted_prediction_tokens": null,
+          "audio_tokens": null,
+          "reasoning_tokens": 1489,
+          "rejected_prediction_tokens": null,
+          "text_tokens": null
+        },
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cache_write_tokens": null,
+          "cached_tokens": 1664,
+          "image_tokens": null,
+          "text_tokens": null,
+          "created_cache_tokens": 0,
+          "multimodal_tokens": null
+        }
+      },
+      "summary": "对比 2026-01-03 与 2026-11-18 快照，Samsung T7 2TB 价格由 187.99 升至 436.99，销量标识由 5K+ 降至 1K+，评论数由 37101 降至 5132，评分维持 4.7；当前库存显示仅剩 12 件，卖家为 Sales For You。",
+      "price_trend": "上涨：2026-01-03 为 187.99，2026-11-18 为 436.99；当前 list_price 为 479.99。历史缺少 list_price，无法判断折扣变化。",
+      "sales_trend": "下降：sales_value 从 5000 降至 1000，sales_text 从 5K+ bought in past month 变为 1K+ bought in past month。",
+      "key_changes": [
+        "价格从 187.99 升至 436.99",
+        "销量值从 5000 降至 1000，销量文案从 5K+ 降至 1K+",
+        "评论数从 37101 降至 5132，评分保持 4.7",
+        "库存状态从 In Stock 变为 Only 12 left in stock - order soon.",
+        "卖家从 null 变为 Sales For You",
+        "标题、bullet 文案和 gallery 图片 URL 分辨率有更新"
+      ],
+      "actions": [
+        "核查 187.99 到 436.99 的价格跳变是否真实，并确认当前 479.99 list_price 与 436.99 售价的关系",
+        "核查评论数从 37101 到 5132 的数据一致性，避免据此误判口碑趋势",
+        "监控 Only 12 left in stock 的库存与补货状态",
+        "在价格和评论数据未核实前，降低对销量下降幅度的确定性判断"
+      ],
+      "confidence": "low",
+      "data_gaps": [
+        "历史仅有 2026-01-03 和 2026-11-18 两个快照，缺少中间趋势",
+        "2026-01-03 快照缺少 list_price 和 seller",
+        "评论数从 37101 降至 5132 与评分 4.7 不变存在数据一致性疑问",
+        "当前 history 中 2026-11-18 与 current 重复，未提供额外历史信息"
+      ]
+    },
+    {
+      "case": "B0874XWW23:short",
+      "asin": "B0874XWW23",
+      "product": "Samsung T7",
+      "history_size": 1,
+      "grounding_ok": true,
+      "grounding_violations": [],
+      "fallback": false,
+      "latency_ms": 11744.64,
+      "usage": {
+        "completion_tokens": 787,
+        "prompt_tokens": 1228,
+        "total_tokens": 2015,
+        "completion_tokens_details": {
+          "accepted_prediction_tokens": null,
+          "audio_tokens": null,
+          "reasoning_tokens": 378,
+          "rejected_prediction_tokens": null,
+          "text_tokens": null
+        },
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cache_write_tokens": null,
+          "cached_tokens": 1216,
+          "image_tokens": null,
+          "text_tokens": null,
+          "created_cache_tokens": 0,
+          "multimodal_tokens": null
+        }
+      },
+      "summary": "当前快照日期为2026-11-18，价格436.99美元，标价479.99美元，评分4.7，评论数5132，近月销量文本为“1K+ bought in past month”，库存显示“Only 12 left in stock - order soon.”。历史数据仅有一条且与当前快照一致，无法形成可靠趋势判断。",
+      "price_trend": "无法判断：仅有一个历史快照（2026-11-18），当前价格436.99与唯一历史记录相同，缺少更早价格数据。",
+      "sales_trend": "无法判断：仅有一个历史快照（2026-11-18），当前销量文本“1K+ bought in past month”与唯一历史记录相同，缺少更早销量数据。",
+      "key_changes": [
+        "无可见变化：唯一历史快照与当前快照在价格、评分、评论数、销量文本和库存状态上一致。"
+      ],
+      "actions": [
+        "继续监控价格、库存和销量文本，尤其是当前“Only 12 left in stock - order soon.”的库存状态。",
+        "补充多日快照后再判断价格趋势和销量趋势。",
+        "关注当前价436.99与标价479.99之间的差异是否持续。"
+      ],
+      "confidence": "low",
+      "data_gaps": [
+        "缺少2026-11-18之前的历史快照，无法计算价格趋势。",
+        "缺少多日销量历史，无法判断销量趋势。",
+        "缺少竞品价格与促销信息。",
+        "缺少评论数历史变化数据。",
+        "缺少优惠券或促销活动历史数据。"
+      ]
+    },
+    {
+      "case": "B09C13PZX7:full",
+      "asin": "B09C13PZX7",
+      "product": "雷蛇鼠标",
+      "history_size": 5,
+      "grounding_ok": true,
+      "grounding_violations": [],
+      "fallback": false,
+      "latency_ms": 17543.56,
+      "usage": {
+        "completion_tokens": 1417,
+        "prompt_tokens": 2858,
+        "total_tokens": 4275,
+        "completion_tokens_details": {
+          "accepted_prediction_tokens": null,
+          "audio_tokens": null,
+          "reasoning_tokens": 874,
+          "rejected_prediction_tokens": null,
+          "text_tokens": null
+        },
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cache_write_tokens": null,
+          "cached_tokens": 2816,
+          "image_tokens": null,
+          "text_tokens": null,
+          "created_cache_tokens": 0,
+          "multimodal_tokens": null
+        }
+      },
+      "summary": "当前快照（2026-11-18）显示评分4.6、评论数10769、月销5000（5K+ bought in past month）；价格、币种、库存和卖家字段缺失。历史快照中价格曾为31.99、32.99、34.99美元，月销为10000（10K+ bought in past month），评论数为9215/9222。",
+      "price_trend": "历史价格从2025-12-24的31.99美元升至2026-01-01的32.99美元，再到2026-01-03的34.99美元；当前2026-11-18价格为null，无法判断最新价格趋势。",
+      "sales_trend": "月销从历史快照的10000（10K+ bought in past month）下降至当前快照的5000（5K+ bought in past month）。",
+      "key_changes": [
+        "标题由历史长标题变为当前较短标题：Razer Basilisk V3 Customizable RGB Wired Ergonomic Gaming Mouse, Black",
+        "当前快照价格、list_price、currency、in_stock、availability、seller、coupon均为空",
+        "月销由10000降至5000，sales_text由10K+ bought in past month变为5K+ bought in past month",
+        "评论数由2026-01-03的9222增至2026-11-18的10769",
+        "评分保持4.6",
+        "bullet文案发生变化，当前强调11 PROGRAMMABLE BUTTONS等表述"
+      ],
+      "actions": [
+        "优先补采当前价格、币种、库存、卖家与优惠券信息，避免在价格缺失下做定价判断",
+        "复核2026-11-18快照的月销下降是否由季节性、流量变化或Listing变更导致",
+        "对比历史标题与bullet变更对转化和销量的影响",
+        "持续监控评论数增长与评分稳定性，确认口碑是否维持",
+        "在价格恢复后重新计算价格趋势并与历史31.99/32.99/34.99美元区间比较"
+      ],
+      "confidence": "medium",
+      "data_gaps": [
+        "当前价格",
+        "list_price",
+        "currency",
+        "in_stock",
+        "availability",
+        "seller",
+        "coupon"
+      ]
+    },
+    {
+      "case": "B09C13PZX7:short",
+      "asin": "B09C13PZX7",
+      "product": "雷蛇鼠标",
+      "history_size": 1,
+      "grounding_ok": true,
+      "grounding_violations": [],
+      "fallback": false,
+      "latency_ms": 38636.69,
+      "usage": {
+        "completion_tokens": 667,
+        "prompt_tokens": 1070,
+        "total_tokens": 1737,
+        "completion_tokens_details": {
+          "accepted_prediction_tokens": null,
+          "audio_tokens": null,
+          "reasoning_tokens": 109,
+          "rejected_prediction_tokens": null,
+          "text_tokens": null
+        },
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cache_write_tokens": null,
+          "cached_tokens": 576,
+          "image_tokens": null,
+          "text_tokens": null,
+          "created_cache_tokens": 448,
+          "multimodal_tokens": null
+        }
+      },
+      "summary": "该商品为雷蛇 Basilisk V3 有线人体工学游戏鼠标，当前快照（2026-11-18）显示评分为 4.6，累计评价数 10,769 条，近一个月销量标注为“5K+ bought in past month”（sales_value 5,000）。商品页突出 11 个可编程按键、带拇指托的人体工学外形，以及双模式倾斜滚轮和 Chroma RGB 灯效。历史数据仅有一条，且与当前快照完全一致，因此无法判断价格与销量的变化方向。",
+      "price_trend": "无法判断：current 与 history 中 price、list_price、currency 均为 null，没有任何可用价格数字。",
+      "sales_trend": "无法判断趋势：history 仅含 2026-11-18 单条快照，sales_value 为 5,000、sales_text 为“5K+ bought in past month”，与 current 完全相同，没有可对比的历史基线。",
+      "key_changes": [
+        "无实质变化：history 仅一条记录（2026-11-18），其标题、评分 4.6、评价数 10,769、销量 5,000、要点与描述均与 current 一致。",
+        "价格字段持续缺失：current 与 history 的 price、list_price、currency 均为 null。"
+      ],
+      "actions": [
+        "先补齐价格采集（price、list_price、currency、coupon），再评估定价与促销空间；当前无价格数据，不应做任何价格决策。",
+        "建立多时点快照（至少连续 2–4 周），以形成可计算的 price_trend 与 sales_trend；当前仅单点数据。",
+        "补充 in_stock、availability、seller 字段，用于判断库存与跟卖情况。",
+        "以评分 4.6、评价数 10,769 作为口碑基线，后续快照重点跟踪评价增量与评分变化。"
+      ],
+      "confidence": "low",
+      "data_gaps": [
+        "价格（price 为 null）",
+        "list_price 为 null",
+        "currency 为 null",
+        "库存状态（in_stock 为 null）",
+        "可售状态（availability 为 null）",
+        "卖家（seller 为 null）",
+        "优惠券（coupon 为 null）",
+        "历史快照仅 1 条，缺少时间序列，无法计算价格与销量趋势"
+      ]
+    },
+    {
+      "case": "B0DZFVBQLK:full",
+      "asin": "B0DZFVBQLK",
+      "product": "微星笔记本",
+      "history_size": 2,
+      "grounding_ok": true,
+      "grounding_violations": [],
+      "fallback": false,
+      "latency_ms": 9571.4,
+      "usage": {
+        "completion_tokens": 905,
+        "prompt_tokens": 1745,
+        "total_tokens": 2650,
+        "completion_tokens_details": {
+          "accepted_prediction_tokens": null,
+          "audio_tokens": null,
+          "reasoning_tokens": 454,
+          "rejected_prediction_tokens": null,
+          "text_tokens": null
+        },
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cache_write_tokens": null,
+          "cached_tokens": 1728,
+          "image_tokens": null,
+          "text_tokens": null,
+          "created_cache_tokens": 0,
+          "multimodal_tokens": null
+        }
+      },
+      "summary": "当前快照缺少价格、销量和库存状态，无法判断价格与销售趋势。可确认评分从4.4降至4.0，评论数从186增至381；配送状态从In Stock变为当前地址无法配送。",
+      "price_trend": "无法判断：当前价格缺失；历史仅2026-01-03记录价格为$1679.99。",
+      "sales_trend": "无法判断：当前销量缺失；历史2026-01-03记录为100+ bought in past month。",
+      "key_changes": [
+        "评分由4.4降至4.0",
+        "评论数由186增至381",
+        "配送状态由In Stock变为当前地址无法配送",
+        "当前价格、销量、库存状态缺失，无法与历史价格和销量比较",
+        "标题仅格式差异，产品型号B14WGK-016US一致",
+        "当前bullet points较历史更完整，并新增RTX 5070/DLSS 4相关描述"
+      ],
+      "actions": [
+        "重新抓取当前价格、list_price、currency和库存状态",
+        "确认当前配送限制是否仅针对所选地址，并检查其他配送地址可用性",
+        "监控评分从4.4降至4.0的原因，查看近期评论变化",
+        "在价格恢复后与历史$1679.99进行对比再判断价格趋势",
+        "补充当前销量或排名数据后再评估销售趋势"
+      ],
+      "confidence": "low",
+      "data_gaps": [
+        "当前价格",
+        "当前list_price",
+        "当前currency",
+        "当前销量",
+        "当前库存状态",
+        "当前seller",
+        "当前coupon"
+      ]
+    },
+    {
+      "case": "B0DZFVBQLK:short",
+      "asin": "B0DZFVBQLK",
+      "product": "微星笔记本",
+      "history_size": 1,
+      "grounding_ok": true,
+      "grounding_violations": [],
+      "fallback": false,
+      "latency_ms": 47863.64,
+      "usage": {
+        "completion_tokens": 708,
+        "prompt_tokens": 1267,
+        "total_tokens": 1975,
+        "completion_tokens_details": {
+          "accepted_prediction_tokens": null,
+          "audio_tokens": null,
+          "reasoning_tokens": 447,
+          "rejected_prediction_tokens": null,
+          "text_tokens": null
+        },
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cache_write_tokens": null,
+          "cached_tokens": 1216,
+          "image_tokens": null,
+          "text_tokens": null,
+          "created_cache_tokens": 0,
+          "multimodal_tokens": null
+        }
+      },
+      "summary": "该商品为微星 Katana 15 HX 游戏本，配置 Intel Core i9-14900HX、NVIDIA GeForce RTX 5070、32GB DDR5、1TB NVMe SSD，当前评分 4.0，评论数 381。价格、销量、库存状态和卖家信息缺失，页面显示无法配送至所选地点。",
+      "price_trend": "无历史价格数据，无法判断",
+      "sales_trend": "无销量数据，无法判断",
+      "key_changes": [
+        "仅有一条快照，无法进行历史变化对比"
+      ],
+      "actions": [
+        "补充价格、销量、库存状态和卖家数据后再评估趋势",
+        "确认配送限制是否影响商品可售性",
+        "持续监控评分与评论数变化"
+      ],
+      "confidence": "low",
+      "data_gaps": [
+        "价格",
+        "预计销量",
+        "库存状态",
+        "卖家",
+        "货币",
+        "历史快照不足"
+      ]
+    },
+    {
+      "case": "B0DZZWMB2L:full",
+      "asin": "B0DZZWMB2L",
+      "product": "华硕ROG电脑",
+      "history_size": 2,
+      "grounding_ok": true,
+      "grounding_violations": [],
+      "fallback": true,
+      "latency_ms": 24980.42,
+      "usage": {
+        "completion_tokens": 1172,
+        "prompt_tokens": 1853,
+        "total_tokens": 3025,
+        "completion_tokens_details": {
+          "accepted_prediction_tokens": null,
+          "audio_tokens": null,
+          "reasoning_tokens": 667,
+          "rejected_prediction_tokens": null,
+          "text_tokens": null
+        },
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cache_write_tokens": null,
+          "cached_tokens": 1792,
+          "image_tokens": null,
+          "text_tokens": null,
+          "created_cache_tokens": 0,
+          "multimodal_tokens": null
+        }
+      },
+      "summary": "LLM 分析不可用，保留原始数据供人工复核。",
+      "price_trend": "未生成",
+      "sales_trend": "未生成",
+      "key_changes": [
+        "LLM 输出解析失败或调用失败"
+      ],
+      "actions": [
+        "人工复核原始快照"
+      ],
+      "confidence": "low",
+      "data_gaps": [
+        "价格",
+        "预计销量",
+        "分析降级：数字 grounding 未通过",
+        "未溯源数字：key_changes:51"
+      ]
+    },
+    {
+      "case": "B0DZZWMB2L:short",
+      "asin": "B0DZZWMB2L",
+      "product": "华硕ROG电脑",
+      "history_size": 1,
+      "grounding_ok": true,
+      "grounding_violations": [],
+      "fallback": false,
+      "latency_ms": 56315.31,
+      "usage": {
+        "completion_tokens": 828,
+        "prompt_tokens": 1335,
+        "total_tokens": 2163,
+        "completion_tokens_details": {
+          "accepted_prediction_tokens": null,
+          "audio_tokens": null,
+          "reasoning_tokens": 122,
+          "rejected_prediction_tokens": null,
+          "text_tokens": null
+        },
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cache_write_tokens": null,
+          "cached_tokens": 1280,
+          "image_tokens": null,
+          "text_tokens": null,
+          "created_cache_tokens": 0,
+          "multimodal_tokens": null
+        }
+      },
+      "summary": "当前仅有 2026-11-18 单次快照，且与 history 中唯一记录完全一致，因此无法形成任何价格或销量趋势。商品页显示评分 4.4、评论数 649，配置为 16 英寸 FHD+ 16:10 165Hz/3ms 屏、RTX 5060、i7-14650HX、16GB DDR5-5600MHz、1TB PCIe Gen 4 SSD、Wi-Fi 7、Windows 11 Home。价格、list_price、currency、销量、库存状态、卖家均为空；availability 字段返回的是“无法配送至所选地址”的提示，属于配送限制信息，不能据此判定是否有货。",
+      "price_trend": "无数据：current 与 history 中 price、list_price、currency 均为 null，且仅有一个快照日期（2026-11-18），无法计算价格变化或趋势。",
+      "sales_trend": "无数据：sales_value 与 sales_text 均为 null，仅有一个快照日期，无法计算销量变化；唯一可用的口碑指标为评分 4.4 与评论数 649，但单点数据无法构成趋势。",
+      "key_changes": [
+        "无实质变化：current 与 history 唯一记录（均为 2026-11-18）的标题、评分 4.4、评论数 649、bullet 文案、图片与 availability 文本完全一致。",
+        "无历史对比基线：history 仅含 1 条记录，且日期与 current 相同，不构成时间序列。"
+      ],
+      "actions": [
+        "优先补齐价格字段（price、list_price、currency）与销量字段，否则无法支撑任何定价或销售判断。",
+        "增加快照频率并保留多日历史，至少形成 2 个以上不同日期的记录后再评估趋势。",
+        "核实库存与配送：availability 当前为配送地址限制提示，需用可配送地址或 in_stock 字段确认实际可售状态。",
+        "补充卖家与 coupon 信息，用于判断是否存在第三方卖家竞争或促销活动。",
+        "在价格缺失期间，仅将评分 4.4 / 评论 649 作为口碑参考，不用于推断销量或价格走势。"
+      ],
+      "confidence": "low",
+      "data_gaps": [
+        "价格（price 为 null）",
+        "list_price 为 null",
+        "currency 为 null",
+        "预计销量（sales_value、sales_text 均为 null）",
+        "库存状态（in_stock 为 null；availability 仅为配送地址限制提示）",
+        "卖家（seller 为 null）",
+        "优惠券（coupon 为 null）",
+        "历史时间序列不足：history 仅 1 条且与 current 同日（2026-11-18），无法计算价格与销量趋势"
+      ]
+    }
+  ]
+}

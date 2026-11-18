@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Amazon 商品情报周报 · {{ run.snapshot_date }}</title>
+<style>
+  :root {
+    --paper: #f6f3ec;
+    --surface: #ffffff;
+    --ink: #101b2d;
+    --muted: #5a6678;
+    --line: #e2dccf;
+    --teal: #0e766e;
+    --teal-soft: #e4f1ef;
+    --amber: #a85a12;
+    --amber-soft: #f9eedf;
+    --red: #b3261e;
+    --red-soft: #f9e7e5;
+    --shadow: 0 1px 0 rgba(16, 27, 45, .04), 0 18px 40px -30px rgba(16, 27, 45, .45);
+    --sans: "Microsoft YaHei", "PingFang SC", "Noto Sans SC", "Segoe UI", system-ui, sans-serif;
+    --mono: "Cascadia Code", "SFMono-Regular", Consolas, monospace;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--sans);
+    font-size: 15px;
+    line-height: 1.65;
+  }
+  .wrap { max-width: 1160px; margin: 0 auto; padding: 26px 20px 48px; }
+  .hero {
+    border-bottom: 1px solid var(--line);
+    padding-bottom: 18px;
+    margin-bottom: 18px;
+    display: flex;
+    align-items: flex-end;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+  .hero h1 { margin: 0; font-size: clamp(1.8rem, 4vw, 2.8rem); letter-spacing: -.03em; }
+  .hero p { margin: 4px 0 0; color: var(--muted); }
+  .hero .badges { margin-left: auto; display: flex; gap: 6px; flex-wrap: wrap; }
+  .badge {
+    display: inline-flex; align-items: center; min-height: 24px; padding: 0 9px;
+    border-radius: 999px; font-size: .72rem; font-weight: 700;
+    border: 1px solid var(--line); background: var(--surface); color: var(--muted);
+  }
+  .badge.teal { background: var(--teal-soft); color: var(--teal); border-color: #bcded9; }
+  .badge.amber { background: var(--amber-soft); color: var(--amber); border-color: #ecd2b2; }
+  .badge.red { background: var(--red-soft); color: var(--red); border-color: #efc9c5; }
+  .kpis {
+    display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 10px;
+    margin: 0 0 20px;
+  }
+  .kpi {
+    background: var(--surface); border: 1px solid var(--line); border-radius: 12px;
+    padding: 10px 12px; box-shadow: var(--shadow);
+  }
+  .kpi b { display: block; font-size: 1.35rem; font-family: var(--mono); }
+  .kpi span { color: var(--muted); font-size: .72rem; }
+  .signals { margin: 0 0 20px; }
+  .signals h2 { margin: 0 0 8px; font-size: .95rem; }
+  .signal-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; }
+  .signal {
+    background: var(--surface); border: 1px solid var(--line); border-left: 4px solid var(--teal);
+    border-radius: 10px; padding: 9px 12px; box-shadow: var(--shadow);
+  }
+  .signal.high { border-left-color: var(--red); }
+  .signal.medium { border-left-color: var(--amber); }
+  .signal.low { border-left-color: var(--teal); }
+  .signal p { margin: 5px 0 3px; font-size: .8rem; }
+  .signal small { color: var(--muted); font-size: .7rem; }
+  .signal .badge { min-height: 20px; padding: 0 7px; font-size: .66rem; }
+  .grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
+  .card {
+    background: var(--surface); border: 1px solid var(--line); border-radius: 14px;
+    padding: 14px 16px; box-shadow: var(--shadow); overflow-wrap: anywhere;
+  }
+  .card h2 { margin: 0 0 2px; font-size: 1.05rem; }
+  .card .meta { color: var(--muted); font-size: .72rem; margin-bottom: 10px; }
+  .card .meta a { color: var(--teal); text-decoration: none; }
+  .card .status { float: right; }
+  .thumb {
+    display: block; width: 100%; height: 180px; object-fit: contain;
+    background: #fbfaf7; border: 1px solid var(--line); border-radius: 8px;
+    margin: 4px 0 10px; padding: 6px;
+  }
+  .bullets { margin: 0; padding-left: 18px; font-size: .8rem; }
+  .bullets li { margin: 3px 0; }
+  .snapshot {
+    width: 100%; border-collapse: collapse; font-size: .78rem; margin: 8px 0 10px;
+  }
+  .snapshot th, .snapshot td { border: 1px solid var(--line); padding: 5px 7px; text-align: left; }
+  .snapshot th { background: var(--teal-soft); width: 34%; }
+  .section { margin-top: 10px; }
+  .section h3 { margin: 0 0 4px; font-size: .82rem; color: var(--muted); letter-spacing: .04em; text-transform: uppercase; }
+  .section p { margin: 0 0 4px; }
+  .section ul { margin: 0; padding-left: 18px; }
+  .section li { margin: 2px 0; }
+  .gaps { margin-top: 8px; display: flex; flex-wrap: wrap; gap: 4px; }
+  .gaps span { background: var(--amber-soft); color: var(--amber); border: 1px solid #ecd2b2; border-radius: 999px; padding: 1px 8px; font-size: .7rem; }
+  .confidence { font-size: .72rem; color: var(--muted); margin-top: 8px; }
+  .failed { border-left: 4px solid var(--red); }
+  .skipped { border-left: 4px solid var(--amber); }
+  .success { border-left: 4px solid var(--teal); }
+  .failures { margin-top: 24px; }
+  .failure {
+    background: var(--red-soft); border: 1px solid #efc9c5; border-radius: 10px;
+    padding: 10px 12px; margin: 8px 0; color: var(--red); font-size: .82rem;
+  }
+  .note {
+    margin-top: 26px; padding: 12px 14px; border-top: 1px solid var(--line);
+    color: var(--muted); font-size: .75rem;
+  }
+  code { font-family: var(--mono); font-size: .85em; }
+  @media (max-width: 860px) {
+    .grid { grid-template-columns: 1fr; }
+    .kpis { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .signal-grid { grid-template-columns: 1fr; }
+  }
+  @media print {
+    body { background: #fff; }
+    .card, .kpi { box-shadow: none; break-inside: avoid; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="hero">
+    <div>
+      <h1>Amazon 商品情报周报</h1>
+      <p>{{ run.snapshot_date }} · 运行 {{ run.run_id[:8] }} · 用时 {{ "%.0f"|format(run.duration_ms) }} ms</p>
+    </div>
+    <div class="badges">
+      <span class="badge teal">{{ source_label }}</span>
+      <span class="badge">amazon.com</span>
+      <span class="badge">低频采集 · 非生产</span>
+    </div>
+  </header>
+
+  <section class="kpis" aria-label="运行统计">
+    <div class="kpi"><b>{{ run.total }}</b><span>商品总数</span></div>
+    <div class="kpi"><b>{{ run.success }}</b><span>成功</span></div>
+    <div class="kpi"><b>{{ run.skipped }}</b><span>跳过</span></div>
+    <div class="kpi"><b>{{ run.failed }}</b><span>失败</span></div>
+    <div class="kpi"><b>{{ run.blocked }}</b><span>被拦截</span></div>
+    <div class="kpi"><b>{{ run.cache_hits }}</b><span>缓存命中</span></div>
+    <div class="kpi"><b>{{ "%.0f"|format(run.duration_ms) }}</b><span>耗时 ms</span></div>
+  </section>
+
+  {% if signals %}
+  <section class="signals" aria-label="本周信号">
+    <h2>本周信号</h2>
+    <div class="signal-grid">
+      {% for signal in signals %}
+      <article class="signal {{ signal.severity }}">
+        <span class="badge {% if signal.severity == 'high' %}red{% elif signal.severity == 'medium' %}amber{% else %}teal{% endif %}">{{ signal.severity_label }}</span>
+        <p>{{ signal.text }}</p>
+        <small>{{ signal.evidence }}</small>
+      </article>
+      {% endfor %}
+    </div>
+  </section>
+  {% endif %}
+
+  <main class="grid">
+    {% for product in products %}
+    <article class="card {{ product.status }}">
+      <span class="status badge {% if product.status == 'success' %}teal{% elif product.status == 'failed' %}red{% else %}amber{% endif %}">{{ product.status_label }}</span>
+      <h2>{{ product.name }}</h2>
+      <div class="meta">
+        {{ product.category }} · <a href="{{ product.url }}" target="_blank" rel="noreferrer">{{ product.product_id }}</a>
+        · 历史 {{ product.history_count }} 次
+        {% if product.source %} · 来源 {{ product.source }}{% endif %}
+      </div>
+
+      {% if product.main_image %}
+      <img class="thumb" src="{{ product.main_image }}" alt="{{ product.name }}" loading="lazy" referrerpolicy="no-referrer">
+      {% endif %}
+
+      {% if product.snapshot %}
+      <table class="snapshot">
+        <tr><th>价格</th><td>{{ product.price_display }}</td></tr>
+        <tr><th>List Price</th><td>{{ product.list_price_display }}</td></tr>
+        <tr><th>星级</th><td>{{ product.rating_display }}</td></tr>
+        <tr><th>评价数</th><td>{{ product.reviews_display }}</td></tr>
+        <tr><th>预计销量</th><td>{{ product.sales_display }}</td></tr>
+        <tr><th>库存</th><td>{{ product.stock_display }}</td></tr>
+        <tr><th>卖家</th><td>{{ product.seller_display }}</td></tr>
+        <tr><th>详情图</th><td>{{ product.gallery_count }} 张</td></tr>
+      </table>
+      {% endif %}
+
+      {% if product.bullets %}
+      <div class="section">
+        <h3>产品简介</h3>
+        <ul class="bullets">{% for item in product.bullets %}<li>{{ item }}</li>{% endfor %}</ul>
+      </div>
+      {% endif %}
+
+      {% if product.description and product.description != '—' %}
+      <div class="section">
+        <h3>产品描述</h3>
+        <p>{{ product.description }}</p>
+      </div>
+      {% endif %}
+
+      {% if product.analysis %}
+      <div class="section">
+        <h3>摘要</h3>
+        <p>{{ product.analysis.summary }}</p>
+      </div>
+      <div class="section">
+        <h3>价格 / 销量</h3>
+        <p>{{ product.analysis.price_trend }}</p>
+        <p>{{ product.analysis.sales_trend }}</p>
+      </div>
+      <div class="section">
+        <h3>关键变化</h3>
+        <ul>{% for item in product.analysis.key_changes %}<li>{{ item }}</li>{% endfor %}</ul>
+      </div>
+      <div class="section">
+        <h3>建议</h3>
+        <ul>{% for item in product.analysis.actions %}<li>{{ item }}</li>{% endfor %}</ul>
+      </div>
+      <div class="confidence">置信度：{{ product.analysis.confidence }}</div>
+      {% endif %}
+
+      {% if product.error %}
+      <div class="section">
+        <h3>失败原因</h3>
+        <p>{{ product.error }}</p>
+      </div>
+      {% endif %}
+
+      {% if product.data_gaps %}
+      <div class="gaps">
+        {% for gap in product.data_gaps %}<span>{{ gap }}</span>{% endfor %}
+      </div>
+      {% endif %}
+    </article>
+    {% endfor %}
+  </main>
+
+  {% if failures %}
+  <section class="failures">
+    <h2>失败与隔离</h2>
+    {% for product in failures %}
+    <div class="failure">
+      <strong>{{ product.name }}</strong>：{{ product.error }}。其他商品继续处理，未中断本轮运行。
+    </div>
+    {% endfor %}
+  </section>
+  {% endif %}
+
+  <p class="note">
+    本报告来自 Amazon 公开商品详情页的低频采集；价格、销量、评价等字段以采集时页面为准，
+    可能因地区、账号、卖家和时间而变化。价格可能来自 buybox 或第三方卖家，跨地区/卖家不可直接比较；
+    销量是 K+/百+ 区间口径，不恢复精确值。默认使用 mock 分析，真实模型模式需要自行配置 API。
+    报告不构成采购或投资建议，也不代表 Amazon 或品牌方立场。
+  </p>
+</div>
+</body>
+</html>

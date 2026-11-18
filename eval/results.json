@@ -1,0 +1,82 @@
+{
+  "summary": {
+    "products": 3,
+    "dates": 2,
+    "stored_snapshots": 6,
+    "analyses": 6,
+    "extraction_pass": 42,
+    "extraction_total": 42,
+    "extraction_accuracy": 1.0,
+    "field_by_name": {
+      "price": {
+        "pass": 6,
+        "total": 6
+      },
+      "rating": {
+        "pass": 6,
+        "total": 6
+      },
+      "reviews": {
+        "pass": 6,
+        "total": 6
+      },
+      "sales_value": {
+        "pass": 6,
+        "total": 6
+      },
+      "currency": {
+        "pass": 6,
+        "total": 6
+      },
+      "main_image": {
+        "pass": 6,
+        "total": 6
+      },
+      "gallery": {
+        "pass": 6,
+        "total": 6
+      }
+    },
+    "missing": [],
+    "mismatch": [],
+    "duplicate_rows": 0,
+    "run_stats": {
+      "day1": [
+        3,
+        0,
+        0
+      ],
+      "day2": [
+        3,
+        0,
+        0
+      ],
+      "rerun": [
+        3,
+        0,
+        0
+      ]
+    },
+    "block_checks": {
+      "blocked": true,
+      "failed": true
+    },
+    "excel_checks": {
+      "first_appended": true,
+      "second_updated": true,
+      "no_duplicates": true
+    },
+    "idempotent": true,
+    "confidence": {
+      "high": 0,
+      "medium": 3,
+      "low": 0
+    },
+    "json_contract": {
+      "parse_ok": true,
+      "fallback_ok": true
+    },
+    "report_cards": 3,
+    "report_ok": true
+  }
+}

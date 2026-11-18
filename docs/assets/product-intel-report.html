@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Amazon 商品情报周报 · 2026-11-18</title>
+<style>
+  :root {
+    --paper: #f6f3ec;
+    --surface: #ffffff;
+    --ink: #101b2d;
+    --muted: #5a6678;
+    --line: #e2dccf;
+    --teal: #0e766e;
+    --teal-soft: #e4f1ef;
+    --amber: #a85a12;
+    --amber-soft: #f9eedf;
+    --red: #b3261e;
+    --red-soft: #f9e7e5;
+    --shadow: 0 1px 0 rgba(16, 27, 45, .04), 0 18px 40px -30px rgba(16, 27, 45, .45);
+    --sans: "Microsoft YaHei", "PingFang SC", "Noto Sans SC", "Segoe UI", system-ui, sans-serif;
+    --mono: "Cascadia Code", "SFMono-Regular", Consolas, monospace;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--sans);
+    font-size: 15px;
+    line-height: 1.65;
+  }
+  .wrap { max-width: 1160px; margin: 0 auto; padding: 26px 20px 48px; }
+  .hero {
+    border-bottom: 1px solid var(--line);
+    padding-bottom: 18px;
+    margin-bottom: 18px;
+    display: flex;
+    align-items: flex-end;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+  .hero h1 { margin: 0; font-size: clamp(1.8rem, 4vw, 2.8rem); letter-spacing: -.03em; }
+  .hero p { margin: 4px 0 0; color: var(--muted); }
+  .hero .badges { margin-left: auto; display: flex; gap: 6px; flex-wrap: wrap; }
+  .badge {
+    display: inline-flex; align-items: center; min-height: 24px; padding: 0 9px;
+    border-radius: 999px; font-size: .72rem; font-weight: 700;
+    border: 1px solid var(--line); background: var(--surface); color: var(--muted);
+  }
+  .badge.teal { background: var(--teal-soft); color: var(--teal); border-color: #bcded9; }
+  .badge.amber { background: var(--amber-soft); color: var(--amber); border-color: #ecd2b2; }
+  .badge.red { background: var(--red-soft); color: var(--red); border-color: #efc9c5; }
+  .kpis {
+    display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 10px;
+    margin: 0 0 20px;
+  }
+  .kpi {
+    background: var(--surface); border: 1px solid var(--line); border-radius: 12px;
+    padding: 10px 12px; box-shadow: var(--shadow);
+  }
+  .kpi b { display: block; font-size: 1.35rem; font-family: var(--mono); }
+  .kpi span { color: var(--muted); font-size: .72rem; }
+  .signals { margin: 0 0 20px; }
+  .signals h2 { margin: 0 0 8px; font-size: .95rem; }
+  .signal-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; }
+  .signal {
+    background: var(--surface); border: 1px solid var(--line); border-left: 4px solid var(--teal);
+    border-radius: 10px; padding: 9px 12px; box-shadow: var(--shadow);
+  }
+  .signal.high { border-left-color: var(--red); }
+  .signal.medium { border-left-color: var(--amber); }
+  .signal.low { border-left-color: var(--teal); }
+  .signal p { margin: 5px 0 3px; font-size: .8rem; }
+  .signal small { color: var(--muted); font-size: .7rem; }
+  .signal .badge { min-height: 20px; padding: 0 7px; font-size: .66rem; }
+  .grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
+  .card {
+    background: var(--surface); border: 1px solid var(--line); border-radius: 14px;
+    padding: 14px 16px; box-shadow: var(--shadow); overflow-wrap: anywhere;
+  }
+  .card h2 { margin: 0 0 2px; font-size: 1.05rem; }
+  .card .meta { color: var(--muted); font-size: .72rem; margin-bottom: 10px; }
+  .card .meta a { color: var(--teal); text-decoration: none; }
+  .card .status { float: right; }
+  .thumb {
+    display: block; width: 100%; height: 180px; object-fit: contain;
+    background: #fbfaf7; border: 1px solid var(--line); border-radius: 8px;
+    margin: 4px 0 10px; padding: 6px;
+  }
+  .bullets { margin: 0; padding-left: 18px; font-size: .8rem; }
+  .bullets li { margin: 3px 0; }
+  .snapshot {
+    width: 100%; border-collapse: collapse; font-size: .78rem; margin: 8px 0 10px;
+  }
+  .snapshot th, .snapshot td { border: 1px solid var(--line); padding: 5px 7px; text-align: left; }
+  .snapshot th { background: var(--teal-soft); width: 34%; }
+  .section { margin-top: 10px; }
+  .section h3 { margin: 0 0 4px; font-size: .82rem; color: var(--muted); letter-spacing: .04em; text-transform: uppercase; }
+  .section p { margin: 0 0 4px; }
+  .section ul { margin: 0; padding-left: 18px; }
+  .section li { margin: 2px 0; }
+  .gaps { margin-top: 8px; display: flex; flex-wrap: wrap; gap: 4px; }
+  .gaps span { background: var(--amber-soft); color: var(--amber); border: 1px solid #ecd2b2; border-radius: 999px; padding: 1px 8px; font-size: .7rem; }
+  .confidence { font-size: .72rem; color: var(--muted); margin-top: 8px; }
+  .failed { border-left: 4px solid var(--red); }
+  .skipped { border-left: 4px solid var(--amber); }
+  .success { border-left: 4px solid var(--teal); }
+  .failures { margin-top: 24px; }
+  .failure {
+    background: var(--red-soft); border: 1px solid #efc9c5; border-radius: 10px;
+    padding: 10px 12px; margin: 8px 0; color: var(--red); font-size: .82rem;
+  }
+  .note {
+    margin-top: 26px; padding: 12px 14px; border-top: 1px solid var(--line);
+    color: var(--muted); font-size: .75rem;
+  }
+  code { font-family: var(--mono); font-size: .85em; }
+  @media (max-width: 860px) {
+    .grid { grid-template-columns: 1fr; }
+    .kpis { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .signal-grid { grid-template-columns: 1fr; }
+  }
+  @media print {
+    body { background: #fff; }
+    .card, .kpi { box-shadow: none; break-inside: avoid; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="hero">
+    <div>
+      <h1>Amazon 商品情报周报</h1>
+      <p>2026-11-18 · 运行 c309586b · 用时 2454 ms</p>
+    </div>
+    <div class="badges">
+      <span class="badge teal">缓存回放</span>
+      <span class="badge">amazon.com</span>
+      <span class="badge">低频采集 · 非生产</span>
+    </div>
+  </header>
+
+  <section class="kpis" aria-label="运行统计">
+    <div class="kpi"><b>4</b><span>商品总数</span></div>
+    <div class="kpi"><b>4</b><span>成功</span></div>
+    <div class="kpi"><b>0</b><span>跳过</span></div>
+    <div class="kpi"><b>0</b><span>失败</span></div>
+    <div class="kpi"><b>0</b><span>被拦截</span></div>
+    <div class="kpi"><b>4</b><span>缓存命中</span></div>
+    <div class="kpi"><b>2454</b><span>耗时 ms</span></div>
+  </section>
+
+
+  <section class="signals" aria-label="本周信号">
+    <h2>本周信号</h2>
+    <div class="signal-grid">
+
+      <article class="signal high">
+        <span class="badge red">高</span>
+        <p>Samsung T7：出现第三方卖家，价格不可直接与历史 buybox 比较。</p>
+        <small>Sold by Sales For You Sales For You Sold by Sales For You</small>
+      </article>
+
+      <article class="signal high">
+        <span class="badge red">高</span>
+        <p>Samsung T7：价格较上次上升 132.5%。</p>
+        <small>$187.99 → $436.99</small>
+      </article>
+
+      <article class="signal high">
+        <span class="badge red">高</span>
+        <p>微星笔记本：星级下降 0.40，建议检查评价结构。</p>
+        <small>4.40 → 4.00</small>
+      </article>
+
+    </div>
+  </section>
+
+
+  <main class="grid">
+
+    <article class="card success">
+      <span class="status badge teal">采集完成（有缺口）</span>
+      <h2>雷蛇鼠标</h2>
+      <div class="meta">
+        外设 · <a href="https://www.amazon.com/dp/B09C13PZX7" target="_blank" rel="noreferrer">B09C13PZX7</a>
+        · 历史 5 次
+         · 来源 curl_cffi
+      </div>
+
+
+      <img class="thumb" src="https://m.media-amazon.com/images/I/61AcT0ZuO3L._AC_SL1500_.jpg" alt="雷蛇鼠标" loading="lazy" referrerpolicy="no-referrer">
+
+
+
+      <table class="snapshot">
+        <tr><th>价格</th><td>—</td></tr>
+        <tr><th>List Price</th><td>—</td></tr>
+        <tr><th>星级</th><td>4.60</td></tr>
+        <tr><th>评价数</th><td>10,769</td></tr>
+        <tr><th>预计销量</th><td>5K+ bought in past month</td></tr>
+        <tr><th>库存</th><td>—</td></tr>
+        <tr><th>卖家</th><td>—</td></tr>
+        <tr><th>详情图</th><td>7 张</td></tr>
+      </table>
+
+
+
+      <div class="section">
+        <h3>产品简介</h3>
+        <ul class="bullets"><li>ICONIC ERGONOMIC DESIGN WITH THUMB REST — PC gaming mouse favored by millions worldwide with a form factor that perfectly supports the hand while its buttons are optimally positioned for quick and easy access</li><li>11 PROGRAMMABLE BUTTONS — Assign macros and secondary functions across 11 programmable buttons to execute essential actions like push-to-talk, ping, and more</li><li>HYPERSCROLL TILT WHEEL — Speed through content with a scroll wheel that free-spins until its stopped or switch to tactile mode for more precision and satisfying feedback that’s ideal for cycling through weapons or skills</li><li>11 RAZER CHROMA RGB LIGHTING ZONES — Customize each zone from over 16.8 million colors and countless lighting effects, all while it reacts dynamically with over 150 Chroma integrated games</li><li>OPTICAL MOUSE SWITCHES GEN 2 — With zero unintended misclicks these switches provide crisp, responsive execution at a blistering 0.2ms actuation speed for up to 70 million clicks</li><li>FOCUS plus 26K DPI OPTICAL SENSOR — Best-in-class mouse sensor with intelligent functions flawlessly tracks movement with zero smoothing, allowing for crisp response and pixel-precise accuracy</li></ul>
+      </div>
+
+
+
+      <div class="section">
+        <h3>产品描述</h3>
+        <p>Create, control, and champion your playstyle with the new Razer Basilisk V3—the quintessential ergonomic gaming mouse for customized performance. With 10+1 programmable buttons, a dual-mode tilt scroll wheel, and a heavy dose of Razer Chroma RGB, it's time to light up the competition your way.</p>
+      </div>
+
+
+
+      <div class="section">
+        <h3>摘要</h3>
+        <p>雷蛇鼠标：价格数据缺口，无法判断趋势。 预计销量较上次下降 50.0%（10K+ bought in past month → 5K+ bought in past month）。</p>
+      </div>
+      <div class="section">
+        <h3>价格 / 销量</h3>
+        <p>价格数据缺口，无法判断趋势。</p>
+        <p>预计销量较上次下降 50.0%（10K+ bought in past month → 5K+ bought in past month）。</p>
+      </div>
+      <div class="section">
+        <h3>关键变化</h3>
+        <ul><li>评价数变化 +1,547</li><li>星级变化 +0.00</li><li>预计销量变化 -5,000</li><li>数据缺口：价格</li></ul>
+      </div>
+      <div class="section">
+        <h3>建议</h3>
+        <ul><li>跟进新增评价，尤其是差评。</li><li>检查流量与转化，评估促销效果。</li><li>补抓缺失字段，避免趋势断点。</li></ul>
+      </div>
+      <div class="confidence">置信度：medium</div>
+
+
+
+
+
+      <div class="gaps">
+        <span>价格</span>
+      </div>
+
+    </article>
+
+    <article class="card success">
+      <span class="status badge teal">采集完成（有缺口）</span>
+      <h2>华硕ROG电脑</h2>
+      <div class="meta">
+        笔记本 · <a href="https://www.amazon.com/dp/B0DZZWMB2L" target="_blank" rel="noreferrer">B0DZZWMB2L</a>
+        · 历史 2 次
+         · 来源 curl_cffi
+      </div>
+
+
+      <img class="thumb" src="https://m.media-amazon.com/images/I/81n1T4CYfmL._AC_SL1500_.jpg" alt="华硕ROG电脑" loading="lazy" referrerpolicy="no-referrer">
+
+
+
+      <table class="snapshot">
+        <tr><th>价格</th><td>—</td></tr>
+        <tr><th>List Price</th><td>—</td></tr>
+        <tr><th>星级</th><td>4.40</td></tr>
+        <tr><th>评价数</th><td>649</td></tr>
+        <tr><th>预计销量</th><td>—</td></tr>
+        <tr><th>库存</th><td>—</td></tr>
+        <tr><th>卖家</th><td>—</td></tr>
+        <tr><th>详情图</th><td>7 张</td></tr>
+      </table>
+
+
+
+      <div class="section">
+        <h3>产品简介</h3>
+        <ul class="bullets"><li>HIGH-LEVEL PERFORMANCE – Unleash power with Windows 11 Home, an Intel Core i7 Processor 14650HX, and an NVIDIA GeForce RTX 5060 Laptop GPU powered by the NVIDIA Blackwell architecture and featuring DLSS 4 and Max-Q technologies.</li><li>FAST MEMORY AND STORAGE – Multitask seamlessly with 16GB of DDR5-5600MHz memory and store all your game library on 1TB of PCIe Gen 4 SSD.</li><li>DYNAMIC DISPLAY AND SMOOTH VISUALS – Immerse yourself in stunning visuals with the smooth 165Hz FHD+ display for gaming, creation, and entertainment. Featuring a new ACR film that enhances contrast and reduces glare.</li><li>STATE-OF-THE-ART ROG INTELLIGENT COOLING – ROG’s advanced thermals keep your system cool, quiet and comfortable. State of the art cooling equals best in class performance. Featuring an end-to-end vapor chamber, tri-fan technology and Conductonaut extreme liquid metal applied to the chipset delivers fast gameplay.</li><li>FULL-SURROUND RGB LIGHTBAR, YOUR WAY – Showcase your style with a 360° RGB light bar that syncs with your keyboard and ROG peripherals. In professional settings, Stealth Mode turns off all lighting for a sleek, refined look.</li></ul>
+      </div>
+
+
+
+      <div class="section">
+        <h3>产品描述</h3>
+        <p>Designed for serious gamers, the ROG Strix G16 features a 165Hz/3ms display, ensuring stunning visuals and fluid motion. Powered by an Intel® Core™ i7 Processor 14650HX and NVIDIA® GeForce RTX™ 5060 GPU, enjoy smooth gameplay and performance. With 16GB DDR5 memory, a 1TB PCIe 4.0 SSD, and advanced ROG Intelligent Cooling, be ready to push the limits. The esports-ready keyboard, Dolby Atmos audio, and customizable RGB Aura Light Bar elevate every gaming session. Plus, enjoy tool-free access to RAM and SSD, with 3 months of PC Game Pass for the ultimate gaming experience.</p>
+      </div>
+
+
+
+      <div class="section">
+        <h3>摘要</h3>
+        <p>华硕ROG电脑：价格数据缺口，无法判断趋势。 预计销量数据缺口，无法判断趋势。</p>
+      </div>
+      <div class="section">
+        <h3>价格 / 销量</h3>
+        <p>价格数据缺口，无法判断趋势。</p>
+        <p>预计销量数据缺口，无法判断趋势。</p>
+      </div>
+      <div class="section">
+        <h3>关键变化</h3>
+        <ul><li>评价数变化 +219</li><li>星级变化 +0.00</li><li>数据缺口：价格、预计销量</li></ul>
+      </div>
+      <div class="section">
+        <h3>建议</h3>
+        <ul><li>跟进新增评价，尤其是差评。</li><li>补抓缺失字段，避免趋势断点。</li></ul>
+      </div>
+      <div class="confidence">置信度：medium</div>
+
+
+
+
+
+      <div class="gaps">
+        <span>价格</span><span>预计销量</span>
+      </div>
+
+    </article>
+
+    <article class="card success">
+      <span class="status badge teal">采集完成（有缺口）</span>
+      <h2>微星笔记本</h2>
+      <div class="meta">
+        笔记本 · <a href="https://www.amazon.com/dp/B0DZFVBQLK" target="_blank" rel="noreferrer">B0DZFVBQLK</a>
+        · 历史 2 次
+         · 来源 curl_cffi
+      </div>
+
+
+      <img class="thumb" src="https://m.media-amazon.com/images/I/71TvKdAmIjL._AC_SL1500_.jpg" alt="微星笔记本" loading="lazy" referrerpolicy="no-referrer">
+
+
+
+      <table class="snapshot">
+        <tr><th>价格</th><td>—</td></tr>
+        <tr><th>List Price</th><td>—</td></tr>
+        <tr><th>星级</th><td>4.00</td></tr>
+        <tr><th>评价数</th><td>381</td></tr>
+        <tr><th>预计销量</th><td>—</td></tr>
+        <tr><th>库存</th><td>—</td></tr>
+        <tr><th>卖家</th><td>—</td></tr>
+        <tr><th>详情图</th><td>4 张</td></tr>
+      </table>
+
+
+
+      <div class="section">
+        <h3>产品简介</h3>
+        <ul class="bullets"><li>Intel Core i9 HX Power for Elite Gaming: Dominate demanding titles with the Intel Core i9-14900HX and its 24-core hybrid architecture, delivering fast load times, high FPS, and smooth multitasking.</li><li>GeForce RTX 5070 With Ray Tracing & DLSS 4: Powered by NVIDIA Blackwell, the RTX 5070 delivers stronger ray tracing, higher FPS, faster AI upscaling, and more responsive gameplay—ideal for competitive and cinematic gaming.</li><li>QHD 165Hz, 100% DCI-P3 for Ultra-Clear Combat: The QHD 165Hz display reveals more detail, reduces motion blur, and boosts visibility in fast-paced games while delivering richer, more accurate colors.</li><li>Cooler Boost 5 for Sustained Performance: Dual fans and a 5-heat-pipe share-pipe design keep the CPU and GPU cool, maintaining stable frame rates during long gaming marathons.</li><li>4-Zone RGB Keyboard + Full Game-Ready Ports: Customize your setup with a 4-zone RGB keyboard and highlighted WASD keys. Includes USB-C Gen 2, HDMI up to 8K, multiple USB-A ports, RJ45, Wi-Fi 6E & Hi-Res Audio.</li></ul>
+      </div>
+
+
+
+      <div class="section">
+        <h3>产品描述</h3>
+        <p>Step up your game with the MSI Katana 15 HX, built for players who want faster performance, sharper visuals, and smoother motion. Powered by the Intel Core i9-14900HX and the GeForce RTX 5070 with NVIDIA Blackwell architecture, this laptop pushes high FPS, faster ray-traced effects, and AI-enhanced responsiveness for modern AAA titles. The QHD 165Hz display delivers a competitive edge—motion stays crisp during fast scenes, fine details stay clear, and 100% DCI-P3 color brings game worlds to life with greater depth and accuracy. Cooler Boost 5 keeps everything running at full strength with a du…</p>
+      </div>
+
+
+
+      <div class="section">
+        <h3>摘要</h3>
+        <p>微星笔记本：价格数据缺口，无法判断趋势。 预计销量数据缺口，无法判断趋势。</p>
+      </div>
+      <div class="section">
+        <h3>价格 / 销量</h3>
+        <p>价格数据缺口，无法判断趋势。</p>
+        <p>预计销量数据缺口，无法判断趋势。</p>
+      </div>
+      <div class="section">
+        <h3>关键变化</h3>
+        <ul><li>评价数变化 +195</li><li>星级变化 -0.40</li><li>数据缺口：价格、预计销量</li></ul>
+      </div>
+      <div class="section">
+        <h3>建议</h3>
+        <ul><li>跟进新增评价，尤其是差评。</li><li>补抓缺失字段，避免趋势断点。</li></ul>
+      </div>
+      <div class="confidence">置信度：medium</div>
+
+
+
+
+
+      <div class="gaps">
+        <span>价格</span><span>预计销量</span>
+      </div>
+
+    </article>
+
+    <article class="card success">
+      <span class="status badge teal">采集完成</span>
+      <h2>Samsung T7</h2>
+      <div class="meta">
+        存储 · <a href="https://www.amazon.com/dp/B0874XWW23" target="_blank" rel="noreferrer">B0874XWW23</a>
+        · 历史 2 次
+         · 来源 curl_cffi
+      </div>
+
+
+      <img class="thumb" src="https://m.media-amazon.com/images/I/91YfRIy7kYL._AC_SL1500_.jpg" alt="Samsung T7" loading="lazy" referrerpolicy="no-referrer">
+
+
+
+      <table class="snapshot">
+        <tr><th>价格</th><td>$436.99</td></tr>
+        <tr><th>List Price</th><td>$479.99</td></tr>
+        <tr><th>星级</th><td>4.70</td></tr>
+        <tr><th>评价数</th><td>5,132</td></tr>
+        <tr><th>预计销量</th><td>1K+ bought in past month</td></tr>
+        <tr><th>库存</th><td>有货</td></tr>
+        <tr><th>卖家</th><td>Sold by Sales For You Sales For You Sold by Sales For You</td></tr>
+        <tr><th>详情图</th><td>7 张</td></tr>
+      </table>
+
+
+
+      <div class="section">
+        <h3>产品简介</h3>
+        <ul class="bullets"><li>MADE FOR THE MAKERS: Create; Explore; Store; The T7 Portable SSD delivers fast speeds and durable features to back up any endeavor; Build your video editing empire, file your photographs or back up your blogs all in an instant</li><li>SHARE IDEAS IN A FLASH: Don’t waste a second waiting and spend more time doing; The T7 is embedded with PCIe NVMe technology that brings fast read and write speeds up to 1,050/1,000 MB/s¹, making it almost twice as fast as the T5</li><li>ALWAYS MAKE THE SAVE: Compact design with massive capacity; With capacities up to 4TB, save exactly what you need to your drive – from large working files to game data and everything in between</li><li>ADAPTS TO EVERY NEED: Whether using a PC or mobile phone, count on the T7 for extensive compatibility²; It’s a true team player when it comes to heavy-duty application usage or file-saving</li><li>HI RESOLUTION VIDEO RECORDING: Record Ultra High Resolution (4K 60fs) videos directly onto the T7 Portable SSD with your favorite camera or mobile devices; Supports iPhone 15 Pro Res 4K at 60fps video and more³</li><li>ALL FOR THE SHOT: This strong, sturdy sidekick will help you see it through with shock resistance and fall protection up to 6 feet⁴; With its solid aluminum unibody construction, it’s made to withstand any adventure</li></ul>
+      </div>
+
+
+
+      <div class="section">
+        <h3>产品描述</h3>
+        <p>The Samsung Portable SSD T7 is the next standard in external storage. With transfer rates up to 9.5x faster than traditional external hard drives and read/ write speeds up to 1050 MB/s, you can move massive files around with unparalleled ease and fluidity. Its sleek, shock-resistant design is uncommonly durable, capable of withstanding drops from up to 6ft, so you can take it on-the-go with complete peace of mind. The T7 is compatible with PC, Mac, Android devices, gaming consoles, and more*******. Included in the box are USB Type C-to-C and Type C-to-A cables for added convenience. All firmwa…</p>
+      </div>
+
+
+
+      <div class="section">
+        <h3>摘要</h3>
+        <p>Samsung T7：价格较上次上升 132.5%（$187.99 → $436.99）。 预计销量较上次下降 80.0%（5K+ bought in past month → 1K+ bought in past month）。</p>
+      </div>
+      <div class="section">
+        <h3>价格 / 销量</h3>
+        <p>价格较上次上升 132.5%（$187.99 → $436.99）。</p>
+        <p>预计销量较上次下降 80.0%（5K+ bought in past month → 1K+ bought in past month）。</p>
+      </div>
+      <div class="section">
+        <h3>关键变化</h3>
+        <ul><li>价格变化 +132.5%</li><li>评价数变化 -31,969</li><li>星级变化 +0.00</li><li>预计销量变化 -4,000</li><li>卖家：Sold by Sales For You Sales For You Sold by Sales For You</li></ul>
+      </div>
+      <div class="section">
+        <h3>建议</h3>
+        <ul><li>检查竞品比价与用户反馈。</li><li>检查流量与转化，评估促销效果。</li><li>核实第三方卖家与配送地区；不要直接与历史 buybox 价格比较。</li></ul>
+      </div>
+      <div class="confidence">置信度：medium</div>
+
+
+
+
+
+    </article>
+
+  </main>
+
+
+
+  <p class="note">
+    本报告来自 Amazon 公开商品详情页的低频采集；价格、销量、评价等字段以采集时页面为准，
+    可能因地区、账号、卖家和时间而变化。价格可能来自 buybox 或第三方卖家，跨地区/卖家不可直接比较；
+    销量是 K+/百+ 区间口径，不恢复精确值。默认使用 mock 分析，真实模型模式需要自行配置 API。
+    报告不构成采购或投资建议，也不代表 Amazon 或品牌方立场。
+  </p>
+</div>
+</body>
+</html>

@@ -1,0 +1,40 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+build/
+dist/
+.uv/
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+
+# Environment and secrets
+.env
+.env.*
+!.env.example
+
+# Generated data and reports
+*.db
+*.sqlite
+*.sqlite3
+data/raw/
+data/exports/
+data/runtime/
+reports/
+
+# Logs
+*.log
+logs/
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+
+# Generated mock LLM smoke artifacts
+eval/llm_mock_report.md
+eval/llm_mock_results.json

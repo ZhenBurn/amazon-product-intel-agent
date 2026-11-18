@@ -1,0 +1,84 @@
+{
+  "captured_at": "2026-11-18",
+  "hash_kind": "sha256 of UTF-8 text read from the cached HTML",
+  "source": "amazon.com product detail pages, captured with curl_cffi",
+  "note": "Raw HTML is kept under data/raw (gitignored). Labels were manually checked against the saved pages and the exported workbook.",
+  "pages": [
+    {
+      "asin": "B09C13PZX7",
+      "snapshot_date": "2026-11-18",
+      "html_sha256": "8a7bf5d2fd196076ecba9fcb78d143220224823849e71607df8cc5d48c3ce172",
+      "expected": {
+        "title_contains": "Razer Basilisk V3",
+        "price": null,
+        "list_price": null,
+        "rating": 4.6,
+        "reviews": 10769,
+        "sales_text": "5K+ bought in past month",
+        "bullets_count": 8,
+        "main_image": true,
+        "gallery_count": 7,
+        "seller_present": false,
+        "availability_contains": null
+      },
+      "notes": "China delivery location hides buybox price; price gap is recorded."
+    },
+    {
+      "asin": "B0DZZWMB2L",
+      "snapshot_date": "2026-11-18",
+      "html_sha256": "d18c4362a4eb66444e9a822ea9dd2714359ac0f4509d522c42ca9899273e1a10",
+      "expected": {
+        "title_contains": "ASUS ROG Strix G16",
+        "price": null,
+        "list_price": null,
+        "rating": 4.4,
+        "reviews": 649,
+        "sales_text": null,
+        "bullets_count": 5,
+        "main_image": true,
+        "gallery_count": 7,
+        "seller_present": false,
+        "availability_contains": "cannot be shipped"
+      },
+      "notes": "Region-restricted item; price and sales badge are absent."
+    },
+    {
+      "asin": "B0DZFVBQLK",
+      "snapshot_date": "2026-11-18",
+      "html_sha256": "fbf5e084a92f1e6ce232983e065daeaa76888cd6de4e41d86ec21ad6dc770b4f",
+      "expected": {
+        "title_contains": "msi Katana 15 HX",
+        "price": null,
+        "list_price": null,
+        "rating": 4.0,
+        "reviews": 381,
+        "sales_text": null,
+        "bullets_count": 5,
+        "main_image": true,
+        "gallery_count": 4,
+        "seller_present": false,
+        "availability_contains": "cannot be shipped"
+      },
+      "notes": "Region-restricted item; gallery has fewer images than the other pages."
+    },
+    {
+      "asin": "B0874XWW23",
+      "snapshot_date": "2026-11-18",
+      "html_sha256": "a8e2294e179e39b0002b5a30f0060d08efcd53e557415286e00f4a214ac23101",
+      "expected": {
+        "title_contains": "Samsung T7",
+        "price": 436.99,
+        "list_price": 479.99,
+        "rating": 4.7,
+        "reviews": 5132,
+        "sales_text": "1K+ bought in past month",
+        "bullets_count": 7,
+        "main_image": true,
+        "gallery_count": 7,
+        "seller_present": true,
+        "availability_contains": "Only 12 left"
+      },
+      "notes": "Price comes from a third-party seller, not necessarily the US buybox; seller is recorded and the report warns against direct comparison."
+    }
+  ]
+}

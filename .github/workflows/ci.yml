@@ -1,0 +1,47 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - uses: astral-sh/setup-uv@v5
+
+      - name: Install dependencies
+        run: uv sync --extra dev
+
+      - name: Lint
+        run: uv run ruff check .
+
+      - name: Test
+        run: uv run pytest -q
+
+      - name: Fixture evaluation
+        run: uv run python -m eval.run_eval
+
+      - name: Offline demo
+        run: uv run python -m app.cli demo --no-open
+
+      - name: LLM mock evaluation
+        run: uv run python -m eval.run_llm_eval --mode mock
+
+      - name: Upload evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: product-intel-evidence
+          path: |
+            eval/report.md
+            eval/results.json
+            eval/llm_mock_report.md
+            eval/llm_mock_results.json
+            reports/latest.html
+            data/exports/amazon_products.xlsx
