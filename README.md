@@ -1,8 +1,18 @@
 # Amazon 商品情报 Agent
 
+![CI](https://github.com/ZhenBurn/amazon-product-intel-agent/actions/workflows/ci.yml/badge.svg)
+![Python](https://img.shields.io/badge/python-3.12-blue)
+![License](https://img.shields.io/badge/license-MIT-green)
+
 > 把脏、会变、会被封的外部网页，变成可核对、可回写 Excel 的商品情报；确定性系统负责数字，LLM 只负责解释。
 
 项目：读取 `电商分析.xlsx` 的 4 个 ASIN，低频采集 Amazon 公开商品页，抽取价格、销量、星级、评价、图片、五点描述，SQLite 沉淀历史，生成周报并回写 Excel。
+
+## 预览
+
+<p align="center"><img src="docs/assets/product-intel-report.png" width="70%" alt="Amazon 商品情报周报"></p>
+
+<p align="center"><img src="docs/assets/product-intel-excel.png" width="80%" alt="Excel 回写"></p>
 
 **面试导读**：[`docs/interview/README.md`](docs/interview/README.md) · **真实运行证据**：[`docs/evidence/amazon-live-2026-11-18.md`](docs/evidence/amazon-live-2026-11-18.md) · **真实页评估**：[`eval/real_report.md`](eval/real_report.md) · **LLM 评估**：[`eval/llm_report.md`](eval/llm_report.md)
 
